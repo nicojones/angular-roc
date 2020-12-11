@@ -125,6 +125,46 @@
           }
         }
       }
+    },
+    "readonly-calendar": {
+      "projectType": "library",
+      "root": "projects/readonly-calendar",
+      "sourceRoot": "projects/readonly-calendar/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/readonly-calendar/tsconfig.lib.json",
+            "project": "projects/readonly-calendar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/readonly-calendar/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/readonly-calendar/src/test.ts",
+            "tsConfig": "projects/readonly-calendar/tsconfig.spec.json",
+            "karmaConfig": "projects/readonly-calendar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/readonly-calendar/tsconfig.lib.json",
+              "projects/readonly-calendar/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "readonly-calendar-project"

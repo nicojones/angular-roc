@@ -1,0 +1,21 @@
+.week {
+  display: flex;
+  flex-direction: row;
+
+  &.--header {
+  }
+
+  .day {
+    flex: 0 0 14.28571%;
+    text-align: center;
+
+    &.--name {
+    }
+
+    &.other {
+    }
+
+    &.today {
+    }
+  }
+}

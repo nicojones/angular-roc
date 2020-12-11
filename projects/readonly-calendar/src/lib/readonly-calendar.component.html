@@ -1,0 +1,21 @@
+<div id="rocalendar" [class.disabled]="disabled">
+  <div class="controls">
+    <button class="controls__prev" (click)="showMonth(-1)" [innerHTML]="rocT.btn.prev || '&lt;'"></button>
+    <button class="controls__today" *ngIf="rocT.btn.today" (click)="setToday()" [innerHTML]="rocT.btn.today"></button>
+    <button class="controls__next" (click)="showMonth(1)" [innerHTML]="rocT.btn.next || '&gt;'"></button>
+  </div>
+  <div class="calendar" *ngIf="(calendar.m$ | async) as month">
+    <div class="name">{{ month.name }} {{ month.year }}</div>
+    <div class="week --header">
+      <span class="day --name" *ngFor="let day of calendar.d2s">{{ day }}</span>
+    </div>
+    <div class="week" *ngFor="let week of month.weeks">
+      <a
+        *ngFor="let day of week.days"
+        href="#"
+        class="day {{ day.class }}"
+        (click)="onClick(month, day)"
+      >{{day.number}}</a>
+    </div>
+  </div>
+</div>

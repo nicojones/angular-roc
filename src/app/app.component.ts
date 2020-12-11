@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RocDayClickEvent, RocLocale, RocWeekStartsOn } from 'readonly-calendar';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'readonly-calendar-project';
+  public showCalendar: boolean = true;
+  public date = new Date();
+  public firstDay = RocWeekStartsOn.Wednesday;
+  public title = 'calendar';
+  public locale: RocLocale = ['default', 'short', 'short'];
+
+  public onDayClick(event: RocDayClickEvent) {
+    console.log(event);
+  }
 }

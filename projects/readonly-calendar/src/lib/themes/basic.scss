@@ -1,0 +1,39 @@
+#rocalendar {
+  width: 300px;
+  height: max-content;
+  box-shadow: 0 0 4px 0 #aaa;
+  padding: 8px;
+
+  &.disabled > .calendar {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .day {
+    &, &--name {
+      height: 30px;
+      line-height: 30px;
+      text-decoration: none;
+    }
+
+    &.other {
+      color: #ccc;
+    }
+
+    &.today {
+      background: black;
+      color: white;
+    }
+
+    &:hover {
+      background: #ddd;
+    }
+
+    &:active {
+      background: #aaa;
+      color: inherit;
+    }
+  }
+
+}
+
