@@ -37,16 +37,16 @@ And use it in your component
 
 ## How to configure
 
-Property | Description
---- | ---
-- `date` <br>- type: `Date` or `string`<br>- default: `new Date()` | The date (month) at which the calendar will open  
-- `translations` <br>- type: `RocTranslation`<br>- default: `null` (uses Locale) | Translations for the Calendar. (see `locale` as well). You can pass an object defining the translations (names for Months and Week Days) and the buttons <a id="localisation"></a>  
-- `controls` <br>- type: `RocControls` or `false` (accepts HTML)<br>- default: `{ prev: <, next: > }` | If you don't pass button definitions, only `prev` and `next` will be visible. If you pass as well `{ ... today: '.' }` a third button will be shown. Passing `false` will hide all controls.
-- `locale` <br>- type: `RocLocale`<br>- default: `['default', 'short', 'long']` | If you don't want to pass translations or reuse the ones you have, you can let Javascript use its `locale` library for the translations. `default` will use the system language, otherwise pass a locale like `nl-NL` or `en-GB`. The second and third parameters are the desired format for Days ('Monday' vs 'Mon') and Months ('December' vs 'Dec').
-- `disabled` <br>- type: `boolean`<br>- default: `true` | Set to true to disable `hover` and `click`. Combined with `buttons: false` it's just an overlay which cannot be interacted with.
-- `highlightToday` <br>- type: `boolean`<br>- default: `true` | If `true`, a class `.today` will be added to the calendar coinciding with the `[date]` parameter passed to the component. 
-- `weeksStartsOn` <br>- type: `RocWeekStartsOn`<br>- default: Monday | The day the week starts with. Everything gets calculated automatically.
-- `dayClick` (event) <br>- type: `RocDayClickEvent`| When the calendar is `disabled = false` and a date gets clicked, it will emit an event.
+| Property | Description |
+| --- | --- |
+| - `date` <br>- type: `Date` or `string`<br>- default: `new Date()` | The date (month) at which the calendar will open. |  
+| - `translations` <br>- type: `RocTranslation`<br>- default: `null` (uses Locale) | Translations for the Calendar. (see `locale` as well). You can pass an object defining the translations (names for Months and Week Days) and the buttons <a id="localisation"></a> |  
+| - `controls` <br>- type: `RocControls` or `false` (accepts HTML)<br>- default: `{ prev: <, next: > }` | If you don't pass button definitions, only `prev` and `next` will be visible. If you pass as well `{ ... today: '.' }` a third button will be shown. Passing `false` will hide all controls. |
+| - `locale` <br>- type: `RocLocale`<br>- default: `['default', 'short', 'long']` | If you don't want to pass translations or reuse the ones you have, you can let Javascript use its `locale` library for the translations. `default` will use the system language, otherwise pass a locale like `nl-NL` or `en-GB`. The second and third parameters are the desired format for Days ('Monday' vs 'Mon') and Months ('December' vs 'Dec'). |
+| - `disabled` <br>- type: `boolean`<br>- default: `true` | Set to true to disable `hover` and `click`. Combined with `buttons: false` it's just an overlay which cannot be interacted with. |
+| - `highlightToday` <br>- type: `boolean`<br>- default: `true` | If `true`, a class `.today` will be added to the calendar coinciding with the `[date]` parameter passed to the component. | 
+| - `weeksStartsOn` <br>- type: `RocWeekStartsOn`<br>- default: Monday | The day the week starts with. Everything gets calculated automatically. |
+| - `dayClick` (event) <br>- type: `RocDayClickEvent`| When the calendar is `disabled = false` and a date gets clicked, it will emit an event. |
 
 
 ## More Q&A
