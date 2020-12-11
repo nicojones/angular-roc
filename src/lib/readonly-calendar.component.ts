@@ -6,7 +6,7 @@ import { RocDay } from './types/day';
 import { RocWeekStartsOn } from './enums/roc-week-starts-on';
 import { RocMonth, RocMonthIndex, RocMonthObj } from './types/month';
 import { RocCalendar, RocWeek, RocWeekDays } from './types/calendar';
-import { RocDayClickEvent, RocLocale, RocTranslation } from './types/roc-types';
+import { RocControls, RocDayClickEvent, RocLocale, RocTranslation } from './types/roc-types';
 
 function isLeap(year: number): boolean {
   return !(year & 3 || year & 15 && !(year % 25));
@@ -92,6 +92,12 @@ export class ReadonlyCalendarComponent implements OnInit {
    */
   @Input('translations')
   public rocT: RocTranslation = null as unknown as RocTranslation;
+
+  /**
+   * Controls for the calendar (Previous, Next, Current date)
+   */
+  @Input('controls')
+  public b: RocControls = { prev: '&lt;', next: '&gt;' };
 
   /**
    * If you don't want to pass translations they will be auto-generated. The locale accepts an array of three parameters:
@@ -273,9 +279,9 @@ export class ReadonlyCalendarComponent implements OnInit {
     if (!this.rocT) {
       this.rocT = {
         months: [] as unknown as RocTranslation['months'],
-        days: [] as unknown as RocTranslation['days'],
-        btn: {}
+        days: [] as unknown as RocTranslation['days']
       } as RocTranslation;
+
       const date = new Date();
       for (let i = 10; i < 17; ++i) { // from 0 to 7, but in the middle of the month...
         date.setDate(i);
