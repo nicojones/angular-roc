@@ -1,8 +1,0 @@
-<button (click)="showCalendar = !showCalendar">Toggle CALENDAR</button>
-<readonly-calendar
-  *ngIf="showCalendar"
-  [weekStartsOn]="firstDay"
-  [disabled]="false"
-  [locale]="locale"
-  (dayClick)="onDayClick($event)"
-></readonly-calendar>
