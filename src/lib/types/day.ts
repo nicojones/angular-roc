@@ -1,6 +1,8 @@
-type DayClassTypes = '' | 'other' | 'today';
+import { RocDayTitle } from './roc-types';
 
-export interface RocDay {
+type DayClassTypes = '' | 'other' | 'today' | 'special';
+
+export interface RocDay extends RocDayTitle {
   number: number;
   class?: DayClassTypes;
 }

@@ -14,6 +14,8 @@
         *ngFor="let day of week.days"
         href="#"
         class="day {{ day.class }}"
+        [attr.data-info]="day.data"
+        [attr.title]="day.title"
         (click)="onClick(month, day)"
       >{{day.number}}</a>
     </div>

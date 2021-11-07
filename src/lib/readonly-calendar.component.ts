@@ -6,7 +6,7 @@ import { RocDay } from './types/day';
 import { RocWeekStartsOn } from './enums/roc-week-starts-on';
 import { RocMonth, RocMonthIndex, RocMonthObj } from './types/month';
 import { RocCalendar, RocWeek, RocWeekDays } from './types/calendar';
-import { RocControls, RocDayClickEvent, RocLocale, RocTranslation } from './types/roc-types';
+import { RocControls, RocDayClickEvent, RocLocale, RocSpecialDay, RocDayKey, RocTranslation, RocSpecials } from './types/roc-types';
 
 function isLeap(year: number): boolean {
   return !(year & 3 || year & 15 && !(year % 25));
@@ -81,26 +81,33 @@ function weekPrevMonth (index: RocMonthIndex, startsOn: number): RocWeekDays {
 export class ReadonlyCalendarComponent implements OnInit {
 
   /**
-   * The calendar will open by default on a view that displays this date.
+   * @var date The calendar will open by default on a view that displays this date.
    */
   @Input()
   public date: Date | string = new Date();
 
   /**
-   * The calendar translations. Not added into the build to save size. Please add the language you wish to use by importing (or creating)
-   * the file yourself and pass it along.
+   * @var specials If you need special days to be highlighted.
+   */
+  @Input()
+  public specials: RocSpecials = {};
+
+  /**
+   * @var translations The calendar translations. Not added into the build to save size. Please add
+   * the language you wish to use by importing (or creating) the file yourself and pass it along.
    */
   @Input('translations')
   public rocT: RocTranslation = null as unknown as RocTranslation;
 
   /**
-   * Controls for the calendar (Previous, Next, Current date)
+   * @var controls Controls for the calendar (Previous, Next, Current date)
    */
   @Input('controls')
   public b: RocControls = { prev: '&lt;', next: '&gt;' };
 
   /**
-   * If you don't want to pass translations they will be auto-generated. The locale accepts an array of three parameters:
+   * @var locale If you don't want to pass translations they will be auto-generated. 
+   * The locale accepts an array of three parameters:
    * @param locale[0] -> The locale (en-GB, or nl-NL... or `default` to use the user's)
    * @param locale[1] -> Short/Long weekday name
    * @param locale[2] -> Short/Long month name
@@ -109,25 +116,25 @@ export class ReadonlyCalendarComponent implements OnInit {
   public locale: RocLocale = ['default', 'short', 'long'];
 
   /**
-   * If you disable the calendar, no hover/click effects are in place.
+   * @var disabled If you disable the calendar, no hover/click effects are in place.
    */
   @Input()
-  public disabled: boolean = true;
+  public disabled = true;
 
   /**
-   * Set it to true to add a `today` class to the current {@see date}
+   * @var highlightToday Set it to true to add a `today` class to the current {@see date}
    */
   @Input('highlightToday')
   public seeToday: boolean = true;
 
   /**
-   * Set the first day of the week
+   * @var weekStartsOn Set the first day of the week
    */
   @Input('weekStartsOn')
   public rocStart: RocWeekStartsOn = RocWeekStartsOn.Monday;
 
   /**
-   * Event emitted when clicking on a day.
+   * @var dayClick Event emitted when clicking on a day.
    */
   @Output('dayClick')
   public click: EventEmitter<RocDayClickEvent> = new EventEmitter();
@@ -216,6 +223,7 @@ export class ReadonlyCalendarComponent implements OnInit {
       month: month.month + 1, /* because they are 0-based */
       isLeap: month.isLeap,
       day: day.number,
+      dateStr: `${month.year}-${month.month + 1}-${day.number}`,
       date: new Date(month.year, month.month, day.number)
     });
   };
@@ -241,7 +249,11 @@ export class ReadonlyCalendarComponent implements OnInit {
 
     let week: RocWeek = { days: weekPrevMonth(index, this.rocStart) };
     for (let i = 1; i <= monthLength; ++i) {
-      week.days.push({ number: i, class: (day === i && this.seeToday) ? 'today' : '' });
+      const rocDay: RocDay = { number: i, class: (day === i && this.seeToday) ? 'today' : '' };
+      console.log(rocDay);
+      this.addSpecial(month, rocDay);
+      console.log(rocDay);
+      week.days.push(rocDay);
       if (week.days.length === 7) {
         month.weeks.push(week);
         week = { days: [] as unknown as RocWeek['days'] };
@@ -289,4 +301,19 @@ export class ReadonlyCalendarComponent implements OnInit {
       }
     }
   };
+
+  private addSpecial(month: RocMonth, rocDay: RocDay): RocDay {
+    const dayKey: RocDayKey = `${month.year}-${month.month + 1}-${rocDay.number}`;
+    console.log(dayKey, this.specials);
+    const special: RocSpecialDay | undefined = this.specials[dayKey];
+    console.log(special);
+
+    if (special) {
+      rocDay.class += ` custom ${special.class}`;
+      rocDay.title = special.title || undefined;
+      rocDay.data = special.data || undefined;
+    }
+
+    return rocDay;
+  }
 }

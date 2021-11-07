@@ -22,7 +22,43 @@ export type RocControls = false | {
   today?: string; // Must be _EXPLICITLY_ defined, or it won't be shown.
 };
 
-export type RocDayClickEvent = Pick<RocMonth, 'year' | 'month' | 'isLeap'> & { day: number } & { date: Date };
+export interface RocDayClickEvent extends Pick<RocMonth, 'year' | 'month' | 'isLeap'> {
+  day: number;
+  date: Date;
+  dateStr: string;
+}
+
+
+/**
+ * @var RocSpecialDayKey
+ * Format in ISO: YYYY-mm-dd. For example 5th of November: 1605-11-05
+ */
+export type RocDayKey = string;
+
+export interface RocDayTitle {
+    /**
+     * @var title
+     * Optional title to show on hover.
+     */
+     title?: string;
+
+     /**
+      * @var data
+      * If you don't want the title to show on hover, you can still set custom data
+      * in the `data-info` attribute, to access it at a later point.
+      */
+     data?: string;
+}
+
+export interface RocSpecialDay extends RocDayTitle {
+  /**
+   * @var class
+   * Optional class to add to the `day` cell.
+   */
+  class?: string;
+}
+
+export type RocSpecials = Record<RocDayKey, RocSpecialDay>;
 
 
 export type RocLocale = ['default' | string, 'short' | 'long', 'short' | 'long'];
