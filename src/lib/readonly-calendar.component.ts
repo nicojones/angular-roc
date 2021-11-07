@@ -218,13 +218,16 @@ export class ReadonlyCalendarComponent implements OnInit {
       return;
     }
 
+    const dateStr: RocDayKey = `${month.year}-${month.month + 1}-${day.number}`;
+
     this.click.emit({
       year: month.year,
       month: month.month + 1, /* because they are 0-based */
       isLeap: month.isLeap,
       day: day.number,
-      dateStr: `${month.year}-${month.month + 1}-${day.number}`,
-      date: new Date(month.year, month.month, day.number)
+      dateStr,
+      date: new Date(month.year, month.month, day.number),
+      data: this.specials[dateStr]?.data || null
     });
   };
 
@@ -311,7 +314,7 @@ export class ReadonlyCalendarComponent implements OnInit {
     if (special) {
       rocDay.class += ` custom ${special.class}`;
       rocDay.title = special.title || undefined;
-      rocDay.data = special.data || undefined;
+      rocDay.data = JSON.stringify(special.data || null);
     }
 
     return rocDay;

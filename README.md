@@ -45,6 +45,9 @@ And use it in your component
 | - `locale` <br>- type: `RocLocale`<br>- default: `['default', 'short', 'long']` | If you don't want to pass translations or reuse the ones you have, you can let Javascript use its `locale` library for the translations. `default` will use the system language, otherwise pass a locale like `nl-NL` or `en-GB`. The second and third parameters are the desired format for Days ('Monday' vs 'Mon') and Months ('December' vs 'Dec'). |
 | - `disabled` <br>- type: `boolean`<br>- default: `true` | Set to true to disable `hover` and `click`. Combined with `buttons: false` it's just an overlay which cannot be interacted with. |
 | - `highlightToday` <br>- type: `boolean`<br>- default: `true` | If `true`, a class `.today` will be added to the calendar coinciding with the `[date]` parameter passed to the component. | 
+| - `specials` <br>- type: `RocSpecials`<br>- default: `{}` | Give a date or list of
+dates that you want to highlight on your calendar. These "specials" allow you to add
+classes to that particular day, a title="" on hover or set _your custom data_ which is returned in the `(dayClick)` event. _Any_ data is valid. | 
 | - `weeksStartsOn` <br>- type: `RocWeekStartsOn`<br>- default: Monday | The day the week starts with. Everything gets calculated automatically. |
 | - `dayClick` (event) <br>- type: `RocDayClickEvent`| When the calendar is `disabled = false` and a date gets clicked, it will emit an event. |
 

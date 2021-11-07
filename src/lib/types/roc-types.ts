@@ -26,6 +26,7 @@ export interface RocDayClickEvent extends Pick<RocMonth, 'year' | 'month' | 'isL
   day: number;
   date: Date;
   dateStr: string;
+  data: any;
 }
 
 
@@ -47,7 +48,7 @@ export interface RocDayTitle {
       * If you don't want the title to show on hover, you can still set custom data
       * in the `data-info` attribute, to access it at a later point.
       */
-     data?: string;
+     data?: any;
 }
 
 export interface RocSpecialDay extends RocDayTitle {
